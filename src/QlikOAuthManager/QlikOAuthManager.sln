@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QlikOAuthManager", "QlikOAuthManager\QlikOAuthManager.csproj", "{B770BE11-78D4-4D89-BFB8-790448E31244}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{B9E5E08E-8415-4F2C-8B8D-0448988D7BD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticateInBrowser", "Examples\AuthenticateInBrowser\AuthenticateInBrowser.csproj", "{524F46F1-5C0F-4BEA-B4A0-154F4AC132F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticateWithClientSecret", "Examples\AuthenticateWithClientSecret\AuthenticateWithClientSecret.csproj", "{1DDB570F-9CD5-4EAC-B3C6-D893725990B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticateWithClientSecretImpersonate", "Examples\AuthenticateWithClientSecretImpersonate\AuthenticateWithClientSecretImpersonate.csproj", "{2F8E0F2F-255F-4288-A387-DE864AAC2799}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B770BE11-78D4-4D89-BFB8-790448E31244}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B770BE11-78D4-4D89-BFB8-790448E31244}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B770BE11-78D4-4D89-BFB8-790448E31244}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B770BE11-78D4-4D89-BFB8-790448E31244}.Release|Any CPU.Build.0 = Release|Any CPU
+		{524F46F1-5C0F-4BEA-B4A0-154F4AC132F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{524F46F1-5C0F-4BEA-B4A0-154F4AC132F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{524F46F1-5C0F-4BEA-B4A0-154F4AC132F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{524F46F1-5C0F-4BEA-B4A0-154F4AC132F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DDB570F-9CD5-4EAC-B3C6-D893725990B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DDB570F-9CD5-4EAC-B3C6-D893725990B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DDB570F-9CD5-4EAC-B3C6-D893725990B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DDB570F-9CD5-4EAC-B3C6-D893725990B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F8E0F2F-255F-4288-A387-DE864AAC2799}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F8E0F2F-255F-4288-A387-DE864AAC2799}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F8E0F2F-255F-4288-A387-DE864AAC2799}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F8E0F2F-255F-4288-A387-DE864AAC2799}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{524F46F1-5C0F-4BEA-B4A0-154F4AC132F7} = {B9E5E08E-8415-4F2C-8B8D-0448988D7BD5}
+		{1DDB570F-9CD5-4EAC-B3C6-D893725990B8} = {B9E5E08E-8415-4F2C-8B8D-0448988D7BD5}
+		{2F8E0F2F-255F-4288-A387-DE864AAC2799} = {B9E5E08E-8415-4F2C-8B8D-0448988D7BD5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FCC50886-3E7B-4532-83F0-7114F2BCD763}
+	EndGlobalSection
+EndGlobal
