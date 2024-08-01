@@ -2,7 +2,7 @@
 .vs
 bin
 obj
-QlikOAuthManager.nuspec
+Qlik.OAuthManager.nuspec
 src/QlikOAuthManager/Qlik.OAuthManager/SystemConstants.cs
 src/QlikOAuthManager/Qlik.OAuthManager/VersionAssemblyInfo.cs
 *.nupkg

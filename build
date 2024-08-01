@@ -6,9 +6,9 @@ echo "Inferred version: $VERSION"
 ####### if ! ./checkConfigureAwait; then
 #######     exit 1
 ####### fi
-sed "s|<version>.*</version>|<version>$VERSION</version>|" QlikOAuthManager.nuspec.template > QlikOAuthManager.nuspec
-sed "s|@VERSION|$VERSION|g" SystemConstants.template > src/QlikOAuthManager/QlikOAuthManager/SystemConstants.cs
-sed "s|@VERSION|$VERSION|g" VersionAssemblyInfo.template > src/QlikOAuthManager/QlikOAuthManager/VersionAssemblyInfo.cs
+sed "s|<version>.*</version>|<version>$VERSION</version>|" Qlik.OAuthManager.nuspec.template > Qlik.OAuthManager.nuspec
+sed "s|@VERSION|$VERSION|g" SystemConstants.template > src/QlikOAuthManager/Qlik.OAuthManager/SystemConstants.cs
+sed "s|@VERSION|$VERSION|g" VersionAssemblyInfo.template > src/QlikOAuthManager/Qlik.OAuthManager/VersionAssemblyInfo.cs
 nuget restore src/QlikOAuthManager/
 build.bat
 mkNugetPkg
