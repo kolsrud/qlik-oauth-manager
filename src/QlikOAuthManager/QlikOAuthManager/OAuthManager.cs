@@ -3,7 +3,6 @@ using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Text;
-using Microsoft.VisualBasic.CompilerServices;
 using Newtonsoft.Json.Linq;
 
 namespace QlikOAuthManager;
@@ -18,7 +17,9 @@ public enum Browser
 
 public class OAuthManager
 {
-	private const string DefaultAuthorizationResponsePage = "<HTML><style>h1 {text-align: center;}p {text-align: center;}</style><BODY><h1>Authentication complete</h1><p>You can close this tab.</p></BODY></HTML>";
+	private const string StyleDefinition = "<style>h1 {text-align: center;}p {text-align: center;}</style>";
+	private const string Body = "<h1>Authentication Complete</h1><p>You can close this tab.<p>";
+	private const string DefaultAuthorizationResponsePage = "<HTML>" + StyleDefinition + "<BODY>" + Body + "</BODY></HTML>";
 
 	public string AuthorizationResponsePage { get; set; } = DefaultAuthorizationResponsePage;
 	public string? AccessToken => FullTokenResponse?["access_token"]?.Value<string>();
@@ -79,7 +80,7 @@ public class OAuthManager
 		var callbackHandler = new HttpOAuthCallbackHandler(new Uri(redirectUri), AuthorizationResponsePage);
 		using (Process.Start(processStartInfo))
 		{
-			_authorizationCode = await callbackHandler.GetResponse();
+			_authorizationCode = await callbackHandler.GetResponse().ConfigureAwait(false);
 		}
 
 		_redirectUri = redirectUri;
@@ -93,7 +94,7 @@ public class OAuthManager
 			grant_type = "client_credentials",
 		});
 
-		FullTokenResponse = await Post("oauth/token", body, clientSecret);
+		FullTokenResponse = await Post("oauth/token", body, clientSecret).ConfigureAwait(false);
 		return AccessToken;
 	}
 
@@ -109,7 +110,7 @@ public class OAuthManager
 				value = subject
 			}
 		});
-		FullTokenResponse = await Post("oauth/token", body, clientSecret);
+		FullTokenResponse = await Post("oauth/token", body, clientSecret).ConfigureAwait(false);
 		return AccessToken;
 	}
 
@@ -120,11 +121,11 @@ public class OAuthManager
 
 		if (RefreshToken == null)
 		{
-			await RequestAccessToken();
+			await RequestAccessToken().ConfigureAwait(false);
 		}
 		else
 		{
-			await RefreshAccessToken();
+			await RefreshAccessToken().ConfigureAwait(false);
 		}
 		return AccessToken;
 	}
@@ -140,7 +141,7 @@ public class OAuthManager
 			redirect_uri = _redirectUri
 		});
 
-		FullTokenResponse = await Post("oauth/token", body);
+		FullTokenResponse = await Post("oauth/token", body).ConfigureAwait(false);
 	}
 
 	private async Task RefreshAccessToken()
@@ -151,7 +152,7 @@ public class OAuthManager
 			refresh_token = RefreshToken
 		});
 
-		FullTokenResponse = await Post("oauth/token", body);
+		FullTokenResponse = await Post("oauth/token", body).ConfigureAwait(false);
 	}
 
 	private async Task<JObject> Post(string endpoint, JObject body, string clientSecret = null)
@@ -162,8 +163,8 @@ public class OAuthManager
 		var message = new HttpRequestMessage(HttpMethod.Post, _tenantUrl + endpoint) { Content = mContent };
 		if (clientSecret != null)
 			message.Headers.Authorization = new AuthenticationHeaderValue("Basic", Base64Encode($"{_clientId}:{clientSecret}"));
-		var rspHttp = await _httpClient.Value.SendAsync(message);
-		return JObject.Parse(await rspHttp.Content.ReadAsStringAsync());
+		var rspHttp = await _httpClient.Value.SendAsync(message).ConfigureAwait(false);
+		return JObject.Parse(await rspHttp.Content.ReadAsStringAsync().ConfigureAwait(false));
 	}
 
 	private static string Base64Encode(string plainText)

@@ -23,7 +23,7 @@ public class HttpOAuthCallbackHandler
 			listener.BeginGetContext(result => ListenerCallback(listener.EndGetContext(result), completionSource), listener);
 			try
 			{
-				return await completionSource.Task;
+				return await completionSource.Task.ConfigureAwait(false);
 			}
 			finally
 			{

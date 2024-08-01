@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>QlikSenseRestClient</id>
+    <version>***</version>
+    <title>QlikOAuthManager</title>
+    <authors>Øystein Kolsrud</authors>
+    <owners>Øystein Kolsrud</owners>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/kolsrud/qlik-oauth-manager</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Experimental package for handling generation of access tokens for QCS.</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright © 2024 Øystein Kolsrud</copyright>
+    <tags>qlik sense oauth</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="13.0.3" />
+    </dependencies>
+    <readme>docs\README.md</readme>
+  </metadata>
+  <files>
+    <file src="src\QlikOAuthManager\QlikOAuthManager\bin\Release\net6.0\QlikOAuthManager.dll" target="lib\net6.0" />
+    <file src="README.md" target="docs\" />
+  </files>
+</package>

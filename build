@@ -1,0 +1,14 @@
+#!/bin/bash
+VERSION=`git describe --tags | sed 's|-\(.*\)-.*|.\1|'`
+VERSION="${VERSION:1}"
+echo "Inferred version: $VERSION"
+####### echo "Checking configure await..."
+####### if ! ./checkConfigureAwait; then
+#######     exit 1
+####### fi
+sed "s|<version>.*</version>|<version>$VERSION</version>|" QlikOAuthManager.nuspec.template > QlikOAuthManager.nuspec
+sed "s|@VERSION|$VERSION|g" SystemConstants.template > src/QlikOAuthManager/QlikOAuthManager/SystemConstants.cs
+sed "s|@VERSION|$VERSION|g" VersionAssemblyInfo.template > src/QlikOAuthManager/QlikOAuthManager/VersionAssemblyInfo.cs
+nuget restore src/QlikOAuthManager/
+build.bat
+mkNugetPkg

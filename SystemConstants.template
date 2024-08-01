@@ -1,0 +1,8 @@
+namespace QlikOAuthManager
+{
+    public static class SystemConstants
+    {
+        public const string LIBRARY_IDENTIFIER = "QlikOAuthManager";
+        public const string LIBRARY_VERSION = "@VERSION";
+    }
+}
