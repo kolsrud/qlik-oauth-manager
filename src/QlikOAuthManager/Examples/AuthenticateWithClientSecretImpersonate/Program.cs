@@ -1,6 +1,4 @@
-﻿using System.Net.Http.Headers;
-using Newtonsoft.Json.Linq;
-using QlikOAuthManager;
+﻿using Qlik.OAuthManager;
 
 namespace AuthenticateWithClientSecretImpersonate;
 

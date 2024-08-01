@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace QlikOAuthManager;
+namespace Qlik.OAuthManager;
 
 public class HttpOAuthCallbackHandler
 {

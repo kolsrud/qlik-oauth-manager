@@ -1,4 +1,4 @@
-﻿using QlikOAuthManager;
+﻿using Qlik.OAuthManager;
 
 namespace AuthenticateWithClientSecret;
 

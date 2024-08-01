@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QlikOAuthManager", "QlikOAuthManager\QlikOAuthManager.csproj", "{B770BE11-78D4-4D89-BFB8-790448E31244}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qlik.OAuthManager", "QlikOAuthManager\Qlik.OAuthManager.csproj", "{B770BE11-78D4-4D89-BFB8-790448E31244}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{B9E5E08E-8415-4F2C-8B8D-0448988D7BD5}"
 EndProject

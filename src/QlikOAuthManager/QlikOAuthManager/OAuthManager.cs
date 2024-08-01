@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using System.Text;
 using Newtonsoft.Json.Linq;
 
-namespace QlikOAuthManager;
+namespace Qlik.OAuthManager;
 
 public enum Browser
 {

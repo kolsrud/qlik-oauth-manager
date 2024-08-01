@@ -19,7 +19,7 @@
     <readme>docs\README.md</readme>
   </metadata>
   <files>
-    <file src="src\QlikOAuthManager\QlikOAuthManager\bin\Release\net6.0\QlikOAuthManager.dll" target="lib\net6.0" />
+    <file src="src\QlikOAuthManager\QlikOAuthManager\bin\Release\net6.0\Qlik.OAuthManager.dll" target="lib\net6.0" />
     <file src="README.md" target="docs\" />
   </files>
 </package>
