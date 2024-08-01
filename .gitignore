@@ -3,6 +3,6 @@
 bin
 obj
 Qlik.OAuthManager.nuspec
-src/QlikOAuthManager/Qlik.OAuthManager/SystemConstants.cs
-src/QlikOAuthManager/Qlik.OAuthManager/VersionAssemblyInfo.cs
+src/Qlik.OAuthManager/Qlik.OAuthManager/SystemConstants.cs
+src/Qlik.OAuthManager/Qlik.OAuthManager/VersionAssemblyInfo.cs
 *.nupkg
