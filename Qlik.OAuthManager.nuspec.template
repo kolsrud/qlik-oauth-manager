@@ -3,7 +3,7 @@
   <metadata>
     <id>QlikSenseRestClient</id>
     <version>***</version>
-    <title>QlikOAuthManager</title>
+    <title>Qlik.OAuthManager</title>
     <authors>Øystein Kolsrud</authors>
     <owners>Øystein Kolsrud</owners>
     <license type="expression">MIT</license>
@@ -19,7 +19,7 @@
     <readme>docs\README.md</readme>
   </metadata>
   <files>
-    <file src="src\QlikOAuthManager\Qlik.OAuthManager\bin\Release\net6.0\Qlik.OAuthManager.dll" target="lib\net6.0" />
+    <file src="src\Qlik.OAuthManager\Qlik.OAuthManager\bin\Release\net6.0\Qlik.OAuthManager.dll" target="lib\net6.0" />
     <file src="README.md" target="docs\" />
   </files>
 </package>
