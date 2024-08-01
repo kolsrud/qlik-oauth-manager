@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>QlikOAuthManager</id>
+    <id>Qlik.OAuthManager</id>
     <version>***</version>
     <title>Qlik.OAuthManager</title>
     <authors>Øystein Kolsrud</authors>
