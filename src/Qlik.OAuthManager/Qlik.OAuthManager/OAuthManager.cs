@@ -55,7 +55,6 @@ public class OAuthManager
 	public async Task AuthorizeInBrowser(string scope, string redirectUri, string? pathToBrowserExe = null)
 	{
 		var state = Guid.NewGuid().ToString();
-		Console.WriteLine(redirectUri);
 		var query = new[]
 		{
 			("response_type", "code"),
@@ -72,7 +71,6 @@ public class OAuthManager
 			Query = string.Join("&", query.Select(arg => arg.Item1 + "=" + Uri.EscapeDataString(arg.Item2)))
 		};
 		var url = builder.Uri.AbsoluteUri;
-		Console.WriteLine(url);
 		var processStartInfo = pathToBrowserExe == null
 			? new ProcessStartInfo(builder.Uri.ToString()) { UseShellExecute = true }
 			: new ProcessStartInfo(pathToBrowserExe, url) { UseShellExecute = true };
@@ -159,8 +157,8 @@ public class OAuthManager
 	{
 		var mContent = new StringContent(body.ToString(), Encoding.ASCII, "application/json");
 		mContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
-		
-		var message = new HttpRequestMessage(HttpMethod.Post, _tenantUrl + endpoint) { Content = mContent };
+		var builder = new UriBuilder(_tenantUrl) { Path = endpoint };
+		var message = new HttpRequestMessage(HttpMethod.Post, builder.Uri.AbsoluteUri) { Content = mContent };
 		if (clientSecret != null)
 			message.Headers.Authorization = new AuthenticationHeaderValue("Basic", Base64Encode($"{_clientId}:{clientSecret}"));
 		var rspHttp = await _httpClient.Value.SendAsync(message).ConfigureAwait(false);
