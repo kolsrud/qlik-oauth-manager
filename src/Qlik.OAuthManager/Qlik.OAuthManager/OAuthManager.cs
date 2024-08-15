@@ -29,22 +29,14 @@ public class OAuthManager
 
 	private readonly string _tenantUrl;
 	private readonly string _clientId;
-	private readonly string _clientSecret;
 	private readonly Code _code = new Code();
-	private string _authorizationCode;
-	private string _redirectUri;
+	private string? _authorizationCode;
+	private string? _redirectUri;
 
 	public OAuthManager(string tenantUrl, string clientId)
 	{
 		_tenantUrl = tenantUrl;
 		_clientId = clientId;
-	}
-
-	public OAuthManager(string tenantUrl, string clientId, string clientSecret)
-	{
-		_tenantUrl = tenantUrl;
-		_clientId = clientId;
-		_clientSecret = clientSecret;
 	}
 
 	public Task AuthorizeInBrowser(string scope, string redirectUri, Browser browser)
@@ -84,6 +76,14 @@ public class OAuthManager
 		_redirectUri = redirectUri;
 	}
 
+	public Task<string> RequestNewAccessToken()
+	{
+		if (_authorizationCode == null)
+			throw new InvalidOperationException("Token request must be preceded by authorization call when no client secret is specified.");
+
+		return RefreshToken == null ? RequestAccessToken() : RefreshAccessToken();
+	}
+
 	public async Task<string> RequestNewAccessToken(string clientSecret)
 	{
 		var body = JObject.FromObject(new
@@ -112,23 +112,7 @@ public class OAuthManager
 		return AccessToken;
 	}
 
-	public async Task<string> RequestNewAccessToken()
-	{
-		if (_authorizationCode == null)
-			throw new InvalidOperationException("Token request must be preceded by authorization call when no client secret is specified.");
-
-		if (RefreshToken == null)
-		{
-			await RequestAccessToken().ConfigureAwait(false);
-		}
-		else
-		{
-			await RefreshAccessToken().ConfigureAwait(false);
-		}
-		return AccessToken;
-	}
-
-	private async Task RequestAccessToken()
+	private async Task<string> RequestAccessToken()
 	{
 		var body = JObject.FromObject(new
 		{
@@ -140,9 +124,10 @@ public class OAuthManager
 		});
 
 		FullTokenResponse = await Post("oauth/token", body).ConfigureAwait(false);
+		return AccessToken;
 	}
 
-	private async Task RefreshAccessToken()
+	private async Task<string> RefreshAccessToken()
 	{
 		var body = JObject.FromObject(new
 		{
@@ -151,9 +136,10 @@ public class OAuthManager
 		});
 
 		FullTokenResponse = await Post("oauth/token", body).ConfigureAwait(false);
+		return AccessToken;
 	}
 
-	private async Task<JObject> Post(string endpoint, JObject body, string clientSecret = null)
+	private async Task<JObject> Post(string endpoint, JObject body, string? clientSecret = null)
 	{
 		var mContent = new StringContent(body.ToString(), Encoding.ASCII, "application/json");
 		mContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
