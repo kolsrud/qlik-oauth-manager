@@ -32,13 +32,17 @@ namespace Qlik.OAuthManager
 		public JObject FullTokenResponse { get; private set; }
 		private readonly Lazy<HttpClient> _httpClient = new Lazy<HttpClient>(() => new HttpClient());
 
-		private readonly string _tenantUrl;
+		private readonly Uri _tenantUrl;
 		private readonly string _clientId;
 		private readonly Code _code = new Code();
 		private string _authorizationCode;
 		private string _redirectUri;
 
-		public OAuthManager(string tenantUrl, string clientId)
+		public OAuthManager(string tenantUrl, string clientId) : this(new Uri(tenantUrl), clientId)
+		{
+		}
+
+		public OAuthManager(Uri tenantUrl, string clientId)
 		{
 			_tenantUrl = tenantUrl;
 			_clientId = clientId;
