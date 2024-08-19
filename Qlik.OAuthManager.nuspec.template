@@ -20,6 +20,7 @@
   </metadata>
   <files>
     <file src="src\Qlik.OAuthManager\Qlik.OAuthManager\bin\Release\net6.0\Qlik.OAuthManager.dll" target="lib\net6.0" />
+    <file src="src\Qlik.OAuthManager\Qlik.OAuthManager\bin\Release\net48\Qlik.OAuthManager.dll" target="lib\net48" />
     <file src="README.md" target="docs\" />
   </files>
 </package>
