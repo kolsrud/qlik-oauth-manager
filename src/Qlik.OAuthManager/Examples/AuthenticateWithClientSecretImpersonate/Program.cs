@@ -13,7 +13,7 @@ namespace AuthenticateWithClientSecretImpersonate
 			var clientSecret = "<client_secret>";
 			var subject = "<subject>";
 
-			var oauthManager = new OAuthManager(tenantUrl, clientId);
+			IOAuthManager oauthManager = new OAuthManager(tenantUrl, clientId);
 
 			var accessToken = await oauthManager.RequestNewAccessToken(clientSecret, subject);
 			Console.WriteLine("Access token:  " + accessToken);

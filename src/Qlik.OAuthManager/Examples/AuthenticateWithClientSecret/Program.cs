@@ -12,7 +12,7 @@ namespace AuthenticateWithClientSecret
 			var clientId = "<client_id>";
 			var clientSecret = "<client_secret>";
 
-			var oauthManager = new OAuthManager(tenantUrl, clientId);
+			IOAuthManager oauthManager = new OAuthManager(tenantUrl, clientId);
 
 			var accessToken = await oauthManager.RequestNewAccessToken(clientSecret);
 			Console.WriteLine("Access token:  " + accessToken);

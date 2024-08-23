@@ -20,7 +20,21 @@ namespace Qlik.OAuthManager
 		MSEdge
 	}
 
-	public class OAuthManager
+	public interface IOAuthManager
+	{
+		string AuthorizationResponsePage { get; set; }
+		string AccessToken { get; }
+		string RefreshToken { get; }
+		JObject FullTokenResponse { get; }
+
+		Task AuthorizeInBrowser(string scope, string redirectUri, Browser browser);
+		Task AuthorizeInBrowser(string scope, string redirectUri, string pathToBrowserExe = null);
+		Task<string> RequestNewAccessToken();
+		Task<string> RequestNewAccessToken(string clientSecret);
+		Task<string> RequestNewAccessToken(string clientSecret, string subject);
+	}
+
+	public class OAuthManager : IOAuthManager
 	{
 		private const string StyleDefinition = "<style>h1 {text-align: center;}p {text-align: center;}</style>";
 		private const string Body = "<h1>Authentication Complete</h1><p>You can close this tab.<p>";
