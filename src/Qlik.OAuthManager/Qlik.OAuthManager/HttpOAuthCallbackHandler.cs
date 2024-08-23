@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Qlik.OAuthManager
 {
-
-	public class HttpOAuthCallbackHandler
+	internal class HttpOAuthCallbackHandler
 	{
 		private readonly string _authorizationResponsePage;
 		private readonly Uri _url;
@@ -16,28 +16,36 @@ namespace Qlik.OAuthManager
 			_url = url;
 		}
 
-		public async Task<string> GetResponse()
+		public async Task<string> GetResponse(CancellationToken cancellationToken)
 		{
 			using (var listener = new HttpListener())
 			{
 				listener.Prefixes.Add(_url.AbsoluteUri);
 				listener.Start();
 				var completionSource = new TaskCompletionSource<string>();
-				listener.BeginGetContext(result => ListenerCallback(listener.EndGetContext(result), completionSource),
-					listener);
+
+				listener.BeginGetContext(result => ListenerCallback(listener, result, completionSource), listener);
 				try
 				{
-					return await completionSource.Task.ConfigureAwait(false);
+					using (cancellationToken.Register(() => { completionSource.TrySetCanceled(); }))
+					{
+						return await completionSource.Task.ConfigureAwait(false);
+					}
 				}
 				finally
 				{
 					listener.Stop();
+					listener.Close();
 				}
 			}
 		}
 
-		private void ListenerCallback(HttpListenerContext context, TaskCompletionSource<string> completionSource)
+		private void ListenerCallback(HttpListener listener, IAsyncResult asyncResult, TaskCompletionSource<string> completionSource)
 		{
+			if (completionSource.Task.IsCompleted)
+				return;
+
+			var context = listener.EndGetContext(asyncResult);
 			var request = context.Request;
 
 			var query = System.Web.HttpUtility.ParseQueryString(request.Url.Query);
