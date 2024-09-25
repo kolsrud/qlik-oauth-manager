@@ -28,6 +28,8 @@ namespace Qlik.OAuthManager
 		string RefreshToken { get; }
 		JObject FullTokenResponse { get; }
 
+		void AddUserAgent(string productName, string productVersion);
+
 		Task AuthorizeInBrowser(string scope, string redirectUri);
 		Task AuthorizeInBrowser(string scope, string redirectUri, Browser browser);
 		Task AuthorizeInBrowser(string scope, string redirectUri, string pathToBrowserExe);
@@ -50,7 +52,12 @@ namespace Qlik.OAuthManager
 		public string RefreshToken => FullTokenResponse?["refresh_token"]?.Value<string>();
 		public JObject FullTokenResponse { get; private set; }
 
-		private readonly Lazy<HttpClient> _httpClient = new Lazy<HttpClient>(() => new HttpClient());
+		private readonly HttpClient _httpClient;
+
+		public void AddUserAgent(string productName, string productVersion)
+		{
+			_httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, productVersion));
+		}
 
 		private readonly Uri _tenantUrl;
 		private readonly string _clientId;
@@ -66,6 +73,8 @@ namespace Qlik.OAuthManager
 		{
 			_tenantUrl = tenantUrl;
 			_clientId = clientId;
+			_httpClient = new HttpClient();
+			AddUserAgent(SystemConstants.LIBRARY_IDENTIFIER, SystemConstants.LIBRARY_VERSION);
 		}
 
 		public Task AuthorizeInBrowser(string scope, string redirectUri)
@@ -162,6 +171,20 @@ namespace Qlik.OAuthManager
 			return AccessToken;
 		}
 
+		public async Task<string> ExchangeToken(string subjectToken)
+		{
+			var body = JObject.FromObject(new
+			{
+				purpose = "websocket",
+				client_id = _clientId,
+				grant_type = "urn:ietf:params:oauth:grant-type:token-exchange",
+				subject_token = subjectToken,
+				subject_token_type = "urn:ietf:params:oauth:token-type:access_token"
+			});
+			FullTokenResponse = await Post("oauth/token", body).ConfigureAwait(false);
+			return AccessToken;
+		}
+
 		private async Task<string> RequestAccessToken()
 		{
 			var body = JObject.FromObject(new
@@ -198,7 +221,7 @@ namespace Qlik.OAuthManager
 			if (clientSecret != null)
 				message.Headers.Authorization =
 					new AuthenticationHeaderValue("Basic", Base64Encode($"{_clientId}:{clientSecret}"));
-			var rspHttp = await _httpClient.Value.SendAsync(message).ConfigureAwait(false);
+			var rspHttp = await _httpClient.SendAsync(message).ConfigureAwait(false);
 			return JObject.Parse(await rspHttp.Content.ReadAsStringAsync().ConfigureAwait(false));
 		}
 
