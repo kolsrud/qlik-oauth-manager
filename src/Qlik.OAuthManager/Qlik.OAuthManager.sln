@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\..\VersionAssemblyInfo.template = ..\..\VersionAssemblyInfo.template
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticateWithRefreshToken", "Examples\AuthenticateWithRefreshToken\AuthenticateWithRefreshToken.csproj", "{054C4871-14A0-400B-AD8A-5953044F28BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{2F8E0F2F-255F-4288-A387-DE864AAC2799}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F8E0F2F-255F-4288-A387-DE864AAC2799}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F8E0F2F-255F-4288-A387-DE864AAC2799}.Release|Any CPU.Build.0 = Release|Any CPU
+		{054C4871-14A0-400B-AD8A-5953044F28BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{054C4871-14A0-400B-AD8A-5953044F28BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{054C4871-14A0-400B-AD8A-5953044F28BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{054C4871-14A0-400B-AD8A-5953044F28BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{524F46F1-5C0F-4BEA-B4A0-154F4AC132F7} = {B9E5E08E-8415-4F2C-8B8D-0448988D7BD5}
 		{1DDB570F-9CD5-4EAC-B3C6-D893725990B8} = {B9E5E08E-8415-4F2C-8B8D-0448988D7BD5}
 		{2F8E0F2F-255F-4288-A387-DE864AAC2799} = {B9E5E08E-8415-4F2C-8B8D-0448988D7BD5}
+		{054C4871-14A0-400B-AD8A-5953044F28BB} = {B9E5E08E-8415-4F2C-8B8D-0448988D7BD5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FCC50886-3E7B-4532-83F0-7114F2BCD763}

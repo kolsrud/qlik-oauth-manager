@@ -37,6 +37,7 @@ namespace Qlik.OAuthManager
 		Task AuthorizeInBrowser(string scope, string redirectUri, Browser browser, CancellationToken cancellationToken);
 		Task AuthorizeInBrowser(string scope, string redirectUri, string pathToBrowserExe, CancellationToken cancellationToken);
 		Task<string> RequestNewAccessToken();
+        Task<string> RefreshAccessToken(string refreshToken = null);
 		Task<string> RequestNewAccessToken(string clientSecret);
 		Task<string> RequestNewAccessToken(string clientSecret, string subject);
 	}
@@ -200,12 +201,16 @@ namespace Qlik.OAuthManager
 			return AccessToken;
 		}
 
-		private async Task<string> RefreshAccessToken()
-		{
-			var body = JObject.FromObject(new
+		public async Task<string> RefreshAccessToken(string refreshToken = null)
+        {
+            var token = refreshToken ?? RefreshToken;
+			if (string.IsNullOrEmpty(token))
+                throw new InvalidOperationException("No refresh token available.");
+
+            var body = JObject.FromObject(new
 			{
 				grant_type = "refresh_token",
-				refresh_token = RefreshToken
+				refresh_token = token
 			});
 
 			FullTokenResponse = await Post("oauth/token", body).ConfigureAwait(false);
